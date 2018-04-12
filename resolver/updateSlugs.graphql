@@ -1,0 +1,7 @@
+type UpdateSlugsPayload {
+    count: Int!
+}
+
+extend type Mutation {
+    updateSlugs(id: ID!, slug: String!): UpdateSlugsPayload
+}

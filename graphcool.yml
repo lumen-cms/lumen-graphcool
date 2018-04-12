@@ -1,0 +1,126 @@
+types: ./types.graphql
+functions:
+ signup:
+   type: resolver
+   schema: ./auth-functions/signup.graphql
+   handler:
+     code: ./auth-functions/signup.ts
+ authenticate:
+   type: resolver
+   schema: ./auth-functions/authenticate.graphql
+   handler:
+     code: ./auth-functions/authenticate.ts
+ loggedInUser:
+   type: resolver
+   schema: ./auth-functions/loggedInUser.graphql
+   handler:
+     code: ./auth-functions/loggedInUser.ts
+ updateSlug:
+   type: resolver
+   schema: ./resolver/updateSlugs.graphql
+   handler:
+     code: ./resolver/updateSlugs.js
+ changeContent:
+   type: subscription
+   query: ./subscriptions/changeContent.graphql
+   handler:
+     code:
+       src: ./subscriptions/changeContent.js
+
+permissions:
+- operation: Article.read
+- operation: Article.create
+  authenticated: true
+- operation: Article.update
+  authenticated: true
+- operation: Article.delete
+  authenticated: true
+- operation: ArticleCategory.read
+- operation: ArticleCategory.create
+  authenticated: true
+- operation: ArticleCategory.update
+  authenticated: true
+- operation: ArticleCategory.delete
+  authenticated: true
+- operation: Author.read
+- operation: Author.create
+  authenticated: true
+- operation: Author.update
+  authenticated: true
+- operation: Author.delete
+  authenticated: true
+- operation: Content.read
+- operation: Content.create
+  authenticated: true
+- operation: Content.update
+  authenticated: true
+- operation: Content.delete
+  authenticated: true
+- operation: File.read
+- operation: File.create
+  authenticated: true
+- operation: File.update
+  authenticated: true
+- operation: File.delete
+  authenticated: true
+- operation: FileReference.read
+- operation: FileReference.create
+  authenticated: true
+- operation: FileReference.update
+  authenticated: true
+- operation: FileReference.delete
+  authenticated: true
+- operation: FileTag.read
+- operation: FileTag.create
+  authenticated: true
+- operation: FileTag.update
+  authenticated: true
+- operation: FileTag.delete
+  authenticated: true
+- operation: Media.read
+- operation: Media.create
+  authenticated: true
+- operation: Media.update
+  authenticated: true
+- operation: Media.delete
+  authenticated: true
+- operation: PageTemplate.read
+- operation: PageTemplate.create
+  authenticated: true
+- operation: PageTemplate.update
+  authenticated: true
+- operation: PageTemplate.delete
+  authenticated: true
+- operation: UrlAlias.read
+- operation: UrlAlias.create
+  authenticated: true
+- operation: UrlAlias.update
+  authenticated: true
+- operation: UrlAlias.delete
+  authenticated: true
+- operation: User.read
+- operation: User.create
+  authenticated: true
+- operation: User.update
+  authenticated: true
+- operation: User.delete
+  authenticated: true
+- operation: ArticleOnArticle.*
+- operation: ArticleOnArticleType.*
+- operation: ArticleOnAuthor.*
+- operation: ArticleOnContent.*
+- operation: ArticleOnMedia.*
+- operation: ArticleTypeOnArticleType.*
+- operation: AuthorOnFile.*
+- operation: ContentOnContent.*
+- operation: FileOnFileTag.*
+- operation: FileReferenceOnFile.*
+- operation: MediaOnFile.*
+- operation: MediaOnFile1.*
+- operation: MediaOnFileReference.*
+- operation: UrlAliasOnArticle.*
+- operation: ContentOnLayout.*
+- operation: FileReferenceOnContent.*
+- operation: BackgroundFileReferenceOnContent.*
+
+rootTokens: []

@@ -1,0 +1,18 @@
+subscription changeContent {
+    Content(filter: {
+        mutation_in: [CREATED,UPDATED]
+    }) {
+        node {
+            id
+            article{
+                id
+            }
+            parent{
+                id
+                article{
+                    id
+                }
+            }
+        }
+    }
+}

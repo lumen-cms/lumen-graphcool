@@ -1,0 +1,225 @@
+type Article @model {
+    additionalLanguages: [Article!]! @relation(name: "ArticleOnArticle")
+    authors: [Author!]! @relation(name: "ArticleOnAuthor")
+    categories: [ArticleCategory!]! @relation(name: "ArticleOnArticleType")
+    contents: [Content!]! @relation(name: "ArticleOnContent")
+    createdAt: DateTime!
+    defaultLanguage: Article @relation(name: "ArticleOnArticle")
+    deleted: Boolean
+    description: String
+    id: ID! @isUnique
+    keywords: String
+    languageKey: LANGUAGE_KEY!
+    media: [Media!]! @relation(name: "ArticleOnMedia")
+    metaTitle: String
+    published: Boolean @defaultValue(value: false)
+    publishedDate: DateTime
+    slug: String! @isUnique
+    teaser: String
+    title: String!
+    updatedAt: DateTime!
+    modified: DateTime
+    urlAliases: [UrlAlias!]! @relation(name: "UrlAliasOnArticle")
+    isBlogEntry: Boolean @defaultValue(value: false)
+}
+
+type ArticleCategory @model {
+    additionalLanguages: [ArticleCategory!]! @relation(name: "ArticleTypeOnArticleType")
+    articles: [Article!]! @relation(name: "ArticleOnArticleType")
+    createdAt: DateTime!
+    defaultLanguage: ArticleCategory @relation(name: "ArticleTypeOnArticleType")
+    id: ID! @isUnique
+    languageKey: LANGUAGE_KEY!
+    slug: String! @isUnique
+    title: String! @isUnique
+    updatedAt: DateTime!
+}
+
+type Author @model {
+    articles: [Article!]! @relation(name: "ArticleOnAuthor")
+    createdAt: DateTime!
+    file: File @relation(name: "AuthorOnFile")
+    id: ID! @isUnique
+    name: String!
+    updatedAt: DateTime!
+}
+
+type Content @model {
+    additionalLanguages: [Content!]! @relation(name: "ContentOnContent")
+    article: Article @relation(name: "ArticleOnContent")
+    createdAt: DateTime!
+    defaultLanguage: Content @relation(name: "ContentOnContent")
+    id: ID! @isUnique
+    languageKey: LANGUAGE_KEY!
+    layoutColumn: LAYOUT_COLUMN
+    layoutIndex: Int
+    published: Boolean @defaultValue(value: false)
+    sorting: Int! @defaultValue(value: 0)
+    updatedAt: DateTime!
+    type: String
+    properties: Json
+    styles: Json
+    parent: Content @relation(name: "ContentOnLayout")
+    childs: [Content!]! @relation(name: "ContentOnLayout")
+    fileReferences: [FileReference!]! @relation(name: "FileReferenceOnContent")
+    backgroundFileReferences: [FileReference!]! @relation(name: "BackgroundFileReferenceOnContent")
+    teaser: String
+    description: String
+}
+
+
+type File @model {
+    author: Author @relation(name: "AuthorOnFile")
+    contentType: String!
+    createdAt: DateTime!
+    fileReferences: [FileReference!]! @relation(name: "FileReferenceOnFile")
+    fileTags: [FileTag!]! @relation(name: "FileOnFileTag")
+    id: ID! @isUnique
+    mediaFiles: [Media!]! @relation(name: "MediaOnFile1")
+    mediaListImages: [Media!]! @relation(name: "MediaOnFile")
+    name: String!
+    secret: String! @isUnique
+    size: Int!
+    updatedAt: DateTime!
+    url: String! @isUnique
+    width: Int
+    height: Int
+}
+
+type FileReference @model {
+    alternative: String
+    caption: String
+    createdAt: DateTime!
+    crop: String
+    file: File @relation(name: "FileReferenceOnFile")
+    id: ID! @isUnique
+    linkId: String
+    linkOpenExternal: Boolean
+    linkSlug: String
+    linkType: LINK_TYPE
+    media: Media @relation(name: "MediaOnFileReference")
+    resize: String
+    sorting: Int
+    title: String
+    updatedAt: DateTime!
+    backgroundStyles: [String!]
+    content: Content @relation(name: "FileReferenceOnContent")
+    contentBackground: Content @relation(name: "BackgroundFileReferenceOnContent")
+}
+
+type FileTag @model {
+    files: [File!]! @relation(name: "FileOnFileTag")
+    id: ID! @isUnique
+    title: String! @isUnique
+}
+
+type Media @model {
+    articles: [Article!]! @relation(name: "ArticleOnMedia")
+    classNames: [String!]
+    classNamesBg: [String!]
+    createdAt: DateTime!
+    fileReferences: [FileReference!]! @relation(name: "MediaOnFileReference")
+    files: [File!]! @relation(name: "MediaOnFile1")
+    header: String
+    headerLayout: HEADER_LAYOUT
+    id: ID! @isUnique
+    imageColumnSize: IMAGE_COLUMNS
+    previewImage: File @relation(name: "MediaOnFile")
+    updatedAt: DateTime!
+}
+
+
+type PageTemplate @model {
+    body: String
+    id: ID! @isUnique
+    languageKey: LANGUAGE_KEY!
+    title: String!
+    bodyJson: Json
+    key: String!
+    type: PAGE_TEMPLATE_TYPE!
+}
+
+type UrlAlias @model {
+    article: Article @relation(name: "UrlAliasOnArticle")
+    createdAt: DateTime!
+    id: ID! @isUnique
+    isActive: Boolean @defaultValue(value: true)
+    path: String! @isUnique
+    updatedAt: DateTime!
+}
+
+type User @model {
+    createdAt: DateTime!
+    email: String @isUnique
+    firstName: String!
+    id: ID! @isUnique
+    initPassword: String
+    languageKey: USER_LANGUAGE_KEY
+    lastName: String!
+    password: String
+    updatedAt: DateTime!
+    role: USER_ROLE
+}
+
+
+enum HEADER_LAYOUT {
+    Hidden
+    H1
+    H2
+    H3
+    H4
+    H5
+    H6
+}
+
+enum IMAGE_COLUMNS {
+    Size_1
+    Size_2
+    Size_3
+    Size_4
+    Size_5
+    Size_6
+    Size_12
+}
+
+enum LANGUAGE_KEY {
+    EN
+    DE
+    ES
+    IT
+    CS
+    PL
+    ZH
+    NL
+}
+
+enum LAYOUT_COLUMN {
+    Column1
+    Column2
+    Column3
+    Column4
+    Column5
+    Column6
+}
+
+enum LINK_TYPE {
+    Page
+    Article
+    External
+}
+
+enum USER_LANGUAGE_KEY {
+    EN
+    DE
+}
+
+enum PAGE_TEMPLATE_TYPE {
+    JSON
+    CODE
+}
+
+enum USER_ROLE {
+    Contributor
+    Admin
+    Moderator
+}
