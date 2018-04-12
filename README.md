@@ -19,6 +19,8 @@ npm install -g graphcool
 * log into your graphcool cli
 * run graphcool deploy
 ```
-git clone 
+git clone https://github.com/lumen-cms/lumen-graphcool.git your-project
+cd your-project
+graphcool deploy
 ```
 
