@@ -14,7 +14,7 @@ graph.cool template to initialize the required data model and resolver functions
 npm install -g graphcool
 ```
 
-## Initialize your backend
+## Initialize / deploy your endpoint
 * clone this repository
 * log into your graphcool cli
 * run graphcool deploy
@@ -22,5 +22,16 @@ npm install -g graphcool
 git clone https://github.com/lumen-cms/lumen-graphcool.git your-project
 cd your-project
 graphcool deploy
+```
+
+### Set up your graphcool target
+* create .graphcoolrc
+```
+targets:
+  project: [your-endpoint] // => check out the settings of your graph.cool backend
+```
+Now you can do:
+```
+graphcool deploy --target project
 ```
 
