@@ -1,9 +1,8 @@
 # GraphQL backend/endpoint for `lumen-cms`
 
 Lumen-CMS is designed as a full working API-driven CMS with GraphQL backend. This project consist of all required schema and resolver functions to create your backend. After the graph.cool deploy you will receive the endpoints to connect your `lumen-cms` to your backend.
-To get your project up and running 3 environment variables are necessary:
-* GRAPHQL_ALIAS
-* GRAPH_FILE_API
+To get your project up and running 2 environment variables are necessary:
+* GRAPHQL_PROJECT_ID
 * GRAPHQL_SUBSRIPTION
 
 ## Getting started
