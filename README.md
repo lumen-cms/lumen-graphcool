@@ -32,10 +32,10 @@ npm install -g graphcool
 ```
 git clone https://github.com/lumen-cms/lumen-graphcool.git your-project
 cd your-project
-graphcool deploy
+graphcool deploy --target [your-endpoint]
 ```
 
-### Set up your graphcool target
+### Set up .graphcoolrc for easier deployment
 * create .graphcoolrc
 ```
 targets:
