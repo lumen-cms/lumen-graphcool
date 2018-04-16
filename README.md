@@ -12,6 +12,14 @@ To get your project up and running 3 environment variables are necessary:
 * Visit https://graph.cool
 * Create an account and log in to your https://console.graph.cool
 * check out quickstart of https://www.graph.cool/docs/quickstart/ 
+* create a new project from scratch
+
+#### Activate the project in graph.cool settings
+* Upgrade your project in the "Danger Zone" of the project settings
+```
+In order to deploy the service from the CLI, you need to upgrade your project. This is irreversible.
+```
+* After the upgrade you can entirely control the project via graphcool-cli
 
 #### Install graphcool cli
 ```
@@ -41,7 +49,7 @@ graphcool deploy --target project
 
 ## Connect `lumen-cms` with your backend
 * visit the 'ENDPOINTS' section of your https://console.graph.cool (on the bottom left corner)
-* copy Project ID or Project Alias from the settings
+* copy Project ID
 * copy SUBSCRIPTION section without wss:// (example: subscriptions.us-west-2.graph.cool)
 * move to your `lumen-cms` project
 * edit `lumen-cms` nuxt.config.js ENV variables as follow:
@@ -49,8 +57,7 @@ graphcool deploy --target project
 // nuxt.config.js
 module.exports={
   env:{
-    GRAPHQL_ALIAS: '[Project ID]', // alternative Project Alias
-    GRAPH_FILE_API: '[Project ID]', // alternative Project Alias
+    GRAPHQL_PROJECT_ID: '[Project ID]',
     GRAPHQL_SUBSRIPTION: '[SUBSCRIPTION]'
   }
 }
