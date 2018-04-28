@@ -84,6 +84,7 @@ type File @model {
     url: String! @isUnique
     width: Int
     height: Int
+    origin: String @isUnique
 }
 
 type FileReference @model {
